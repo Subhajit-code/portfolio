@@ -1,14 +1,14 @@
 "use client";
 
-import ScrollyVideo from "@/components/ScrollyVideo";
+import ScrollyImage from "@/components/ScrollyImage";
 import Overlay from "@/components/Overlay";
 
 export default function Hero() {
   return (
     <div className="relative" id="home">
-      <ScrollyVideo src="/hero-video.mp4">
+      <ScrollyImage src="/subhajit.png">
         {(progress: any) => <Overlay scrollYProgress={progress} />}
-      </ScrollyVideo>
+      </ScrollyImage>
     </div>
   );
 }

@@ -1,16 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { DynamicParticleRing } from "./three";
 
 const skills = [
-  { category: "Frontend", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion", "Redux"] },
-  { category: "Backend", items: ["Node.js", "Express", "Microservices", "PostgreSQL", "MongoDB", "RabbitMQ"] },
-  { category: "DevOps & Cloud", items: ["Docker", "Kubernetes", "AWS EC2", "AWS S3", "CI/CD", "Nginx"] },
+  { category: "Languages & Frameworks", items: ["C", "Python", "Java", "JavaScript", "HTML", "CSS", "React.js", "Node.js", "Express.js", "Tailwind CSS"] },
+  { category: "Databases & Tools", items: ["MongoDB Atlas", "MySQL", "Power BI", "Excel", "VS Code", "Jupyter Notebook"] },
+  { category: "Platforms & Other", items: ["Render", "IntelliJ IDEA", "PowerPoint", "Antigravity"] },
 ];
 
 export default function Skills() {
   return (
     <section className="relative z-20 bg-[#0a0a0a] min-h-screen py-32 px-4 md:px-12 overflow-hidden" id="skills">
+      {/* 3D Particle Ring Background */}
+      <DynamicParticleRing />
+
       {/* Background Ambience */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]" />

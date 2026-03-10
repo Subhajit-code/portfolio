@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import ThreePreloader from "@/components/three/ThreePreloader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Scrollytelling Portfolio",
+  title: "Subhajit Banerjee - Portfolio",
   description: "A cinematic developer portfolio.",
 };
 
@@ -20,7 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} antialiased`}>
+        <SmoothScroll>
+          <ThreePreloader />
+          {children}
+        </SmoothScroll>
+      </body>
     </html>
   );
 }

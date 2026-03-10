@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 html {
-  scroll-behavior: smooth;
+  background: #0a0a0a;
 }
 
 :root {
