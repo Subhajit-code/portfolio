@@ -25,7 +25,7 @@ export default function ScrollyImage({ src, children }: ScrollyImageProps) {
   });
 
   return (
-    <div ref={containerRef} className="relative h-[220vh]">
+    <div ref={containerRef} className="relative h-[120vh] sm:h-[150vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
         <motion.img
           src={src}
@@ -33,8 +33,7 @@ export default function ScrollyImage({ src, children }: ScrollyImageProps) {
           className="h-full w-full object-cover opacity-60"
           style={{ 
             objectPosition: "center 20%",
-            scale: 1.2, // Zoom in slightly to allow cropping
-            x: "-5%" // Shift to the left to cut the left edge
+            scale: 1.1,
           }}
         />
         {/* Render children (Overlay) passing the smoothProgress value */}

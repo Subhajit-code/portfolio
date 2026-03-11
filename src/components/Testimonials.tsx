@@ -142,7 +142,7 @@ export default function Testimonials() {
               {(testimonials.length >= 3 ? [...testimonials, ...testimonials, ...testimonials] : testimonials).map((item, index) => (
                 <div
                   key={index}
-                  className="relative w-[350px] md:w-[450px] p-8 rounded-3xl bg-linear-to-b from-white/10 to-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-xl shrink-0 flex flex-col justify-between hover:border-blue-500/30 transition-colors duration-500 group overflow-hidden hover:bg-white/10"
+                  className="relative w-[85vw] sm:w-[350px] md:w-[450px] p-8 rounded-3xl bg-linear-to-b from-white/10 to-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-xl shrink-0 flex flex-col justify-between hover:border-blue-500/30 transition-colors duration-500 group overflow-hidden hover:bg-white/10"
                 >
                   <div className="absolute -top-10 -right-10 text-[150px] leading-none text-white/5 font-serif group-hover:text-blue-500/10 transition-colors duration-500 pointer-events-none">
                     "
