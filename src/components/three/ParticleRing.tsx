@@ -160,18 +160,28 @@ function AmbientDust() {
   );
 }
 
+import { InViewCanvas } from "./InViewCanvas";
+
 export default function ParticleRing() {
   return (
     <div className="absolute inset-0 z-0" style={{ pointerEvents: "none" }}>
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 50 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance", stencil: false }}
-        dpr={[1, 1.2]}
-      >
-        <GlowingRing />
-        <AmbientDust />
-      </Canvas>
+      <InViewCanvas>
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 50 }}
+          style={{ background: "transparent" }}
+          gl={{ 
+            alpha: true, 
+            antialias: false, 
+            powerPreference: "high-performance", 
+            stencil: false,
+            depth: false
+          }}
+          dpr={[1, 1.5]}
+        >
+          <GlowingRing />
+          <AmbientDust />
+        </Canvas>
+      </InViewCanvas>
     </div>
   );
 }

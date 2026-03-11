@@ -2,6 +2,7 @@
 
 import { useScroll, useSpring, motion, MotionValue } from "framer-motion";
 import { useRef, ReactNode } from "react";
+import Image from "next/image";
 
 interface ScrollyImageProps {
   src: string;
@@ -27,15 +28,20 @@ export default function ScrollyImage({ src, children }: ScrollyImageProps) {
   return (
     <div ref={containerRef} className="relative h-[120vh] sm:h-[150vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
-        <motion.img
-          src={src}
-          alt="Background"
-          className="h-full w-full object-cover opacity-60"
-          style={{ 
-            objectPosition: "center 20%",
-            scale: 1.1,
-          }}
-        />
+        <motion.div
+            className="absolute inset-0 opacity-60"
+            style={{ scale: 1.1 }}
+        >
+            <Image
+                src={src}
+                alt="Background"
+                fill
+                priority
+                quality={85}
+                className="object-cover object-[center_20%]"
+                sizes="100vw"
+            />
+        </motion.div>
         {/* Render children (Overlay) passing the smoothProgress value */}
         {children && children(smoothProgress)}
       </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { DynamicParticleField } from "./three";
+import Image from "next/image";
 
 export default function About() {
     return (
@@ -31,10 +32,12 @@ export default function About() {
                             maskImage: "radial-gradient(circle at center, black 40%, transparent 100%)"
                         }}
                     >
-                        <img
+                        <Image
                             src="/subhajitabout.jpeg"
                             alt="Subhajit Banerjee"
-                            className="w-full h-full object-cover mix-blend-lighten grayscale opacity-70 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                            fill
+                            className="object-cover mix-blend-lighten grayscale opacity-70 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                            sizes="(max-width: 768px) 288px, 400px"
                         />
                     </div>
                 </motion.div>

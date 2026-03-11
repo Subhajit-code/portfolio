@@ -12,32 +12,9 @@ const LoadingBox = () => (
   />
 );
 
-export const DynamicParticleField = dynamic(
-  () => import("./ParticleField"),
-  { ssr: false, loading: () => <LoadingBox /> }
-);
-
-export const DynamicParticleRing = dynamic(
-  () => import("./ParticleRing"),
-  { ssr: false, loading: () => <LoadingBox /> }
-);
-
-export const DynamicWaveGrid = dynamic(
-  () => import("./WaveGrid"),
-  { ssr: false, loading: () => <LoadingBox /> }
-);
-
-export const DynamicNetworkGlobe = dynamic(
-  () => import("./NetworkGlobe"),
-  { ssr: false, loading: () => <LoadingBox /> }
-);
-
-export const DynamicNeuralNetwork = dynamic(
-  () => import("./NeuralNetwork"),
-  { ssr: false, loading: () => <LoadingBox /> }
-);
-
-export const DynamicGlassFlow = dynamic(
-  () => import("./GlassFlow"),
-  { ssr: false, loading: () => <LoadingBox /> }
-);
+export const DynamicParticleField = dynamic(() => import("./ParticleField"), { ssr: false });
+export const DynamicParticleRing = dynamic(() => import("./ParticleRing"), { ssr: false });
+export const DynamicWaveGrid = dynamic(() => import("./WaveGrid"), { ssr: false });
+export const DynamicNetworkGlobe = dynamic(() => import("./NetworkGlobe"), { ssr: false });
+export const DynamicNeuralNetwork = dynamic(() => import("./NeuralNetwork"), { ssr: false });
+export const DynamicGlassFlow = dynamic(() => import("./GlassFlow"), { ssr: false });

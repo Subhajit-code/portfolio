@@ -3,6 +3,7 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { InViewCanvas } from "./InViewCanvas";
 
 function AuroraRibbon({ yOffset, color, speed, amplitude }: {
   yOffset: number;
@@ -14,7 +15,7 @@ function AuroraRibbon({ yOffset, color, speed, amplitude }: {
   const geometryRef = useRef<THREE.PlaneGeometry>(null);
 
   const originalPositions = useMemo(() => {
-    const geo = new THREE.PlaneGeometry(20, 0.8, 80, 4);
+    const geo = new THREE.PlaneGeometry(20, 0.8, 40, 4);
     return new Float32Array(geo.attributes.position.array);
   }, []);
 
@@ -42,7 +43,7 @@ function AuroraRibbon({ yOffset, color, speed, amplitude }: {
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry ref={geometryRef} args={[20, 0.8, 80, 4]} />
+      <planeGeometry ref={geometryRef} args={[20, 0.8, 40, 4]} />
       <meshBasicMaterial
         color={color}
         transparent
@@ -105,20 +106,28 @@ function AmbientParticles() {
 export default function AuroraWaves() {
   return (
     <div className="absolute inset-0 z-0" style={{ pointerEvents: "none" }}>
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 60 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true }}
-        dpr={[1, 1.5]}
-      >
-        {/* Multiple aurora ribbons at different heights/speeds */}
-        <AuroraRibbon yOffset={1.5} color="#8b5cf6" speed={0.6} amplitude={0.4} />
-        <AuroraRibbon yOffset={0.5} color="#6366f1" speed={0.8} amplitude={0.3} />
-        <AuroraRibbon yOffset={-0.3} color="#3b82f6" speed={0.5} amplitude={0.5} />
-        <AuroraRibbon yOffset={-1.2} color="#a855f7" speed={0.7} amplitude={0.35} />
-        <AuroraRibbon yOffset={-2.0} color="#7c3aed" speed={0.4} amplitude={0.45} />
-        <AmbientParticles />
-      </Canvas>
+      <InViewCanvas>
+        <Canvas
+          camera={{ position: [0, 0, 6], fov: 60 }}
+          style={{ background: "transparent" }}
+          gl={{ 
+            alpha: true, 
+            antialias: false,
+            powerPreference: "high-performance",
+            stencil: false,
+            depth: false
+          }}
+          dpr={[1, 1.5]}
+        >
+          {/* Multiple aurora ribbons at different heights/speeds */}
+          <AuroraRibbon yOffset={1.5} color="#8b5cf6" speed={0.6} amplitude={0.4} />
+          <AuroraRibbon yOffset={0.5} color="#6366f1" speed={0.8} amplitude={0.3} />
+          <AuroraRibbon yOffset={-0.3} color="#3b82f6" speed={0.5} amplitude={0.5} />
+          <AuroraRibbon yOffset={-1.2} color="#a855f7" speed={0.7} amplitude={0.35} />
+          <AuroraRibbon yOffset={-2.0} color="#7c3aed" speed={0.4} amplitude={0.45} />
+          <AmbientParticles />
+        </Canvas>
+      </InViewCanvas>
     </div>
   );
 }

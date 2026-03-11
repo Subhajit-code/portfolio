@@ -133,20 +133,29 @@ function FloatingNodes() {
   );
 }
 
+import { InViewCanvas } from "./InViewCanvas";
+
 export default function NeuralNetwork() {
   return (
     <div className="absolute inset-0 z-0" style={{ pointerEvents: "none" }}>
-      <Canvas
-        camera={{ position: [0, 0, 10], fov: 50 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance", stencil: false }}
-        dpr={[1, 1.2]}
-      >
-        <DataStream offset={0} color="#8b5cf6" radius={2} speed={0.1} />
-        <DataStream offset={Math.PI / 2} color="#3b82f6" radius={2.5} speed={-0.08} />
-        <DataStream offset={Math.PI} color="#a855f7" radius={1.8} speed={0.12} />
-        <FloatingNodes />
-      </Canvas>
+      <InViewCanvas>
+        <Canvas
+          camera={{ position: [0, 0, 10], fov: 50 }}
+          style={{ background: "transparent" }}
+          gl={{ 
+            alpha: true, 
+            antialias: false, 
+            powerPreference: "high-performance", 
+            stencil: false 
+          }}
+          dpr={[1, 1.5]}
+        >
+          <DataStream offset={0} color="#8b5cf6" radius={2} speed={0.1} />
+          <DataStream offset={Math.PI / 2} color="#3b82f6" radius={2.5} speed={-0.08} />
+          <DataStream offset={Math.PI} color="#a855f7" radius={1.8} speed={0.12} />
+          <FloatingNodes />
+        </Canvas>
+      </InViewCanvas>
     </div>
   );
 }

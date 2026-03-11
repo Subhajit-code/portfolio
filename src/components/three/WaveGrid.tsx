@@ -3,13 +3,14 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { InViewCanvas } from "./InViewCanvas";
 
 function AnimatedGrid() {
   const meshRef = useRef<THREE.Mesh>(null);
   const geometryRef = useRef<THREE.PlaneGeometry>(null);
 
   const gridSize = 40;
-  const segments = 40;
+  const segments = 25;
 
   // Store original positions
   const originalPositions = useMemo(() => {
@@ -122,14 +123,22 @@ function Scene() {
 export default function WaveGrid() {
   return (
     <div className="absolute inset-0 z-0" style={{ pointerEvents: "none" }}>
-      <Canvas
-        camera={{ position: [0, 8, 15], fov: 55, near: 0.1, far: 100 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance", stencil: false }}
-        dpr={[1, 1.2]}
-      >
-        <Scene />
-      </Canvas>
+      <InViewCanvas>
+        <Canvas
+          camera={{ position: [0, 8, 15], fov: 55, near: 0.1, far: 100 }}
+          style={{ background: "transparent" }}
+          gl={{ 
+            alpha: true, 
+            antialias: false, 
+            powerPreference: "high-performance", 
+            stencil: false,
+            depth: false
+          }}
+          dpr={[1, 1.5]}
+        >
+          <Scene />
+        </Canvas>
+      </InViewCanvas>
     </div>
   );
 }

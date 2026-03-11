@@ -3,6 +3,7 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { InViewCanvas } from "./InViewCanvas";
 
 function GlassPlate({ position, rotation, scale, color }: {
   position: [number, number, number];
@@ -23,15 +24,12 @@ function GlassPlate({ position, rotation, scale, color }: {
   return (
     <mesh ref={meshRef} position={position} rotation={rotation} scale={scale}>
       <boxGeometry args={[1, 1, 0.05]} />
-      <meshPhysicalMaterial
+      <meshStandardMaterial
         color={color}
-        metalness={0.1}
-        roughness={0.1}
-        transmission={0.8}
-        thickness={0.5}
+        metalness={0.2}
+        roughness={0.05}
         transparent
-        opacity={0.4}
-        ior={1.5}
+        opacity={0.6}
       />
     </mesh>
   );
@@ -40,8 +38,8 @@ function GlassPlate({ position, rotation, scale, color }: {
 function Scene() {
   const plates = useMemo(() => {
     const data = [];
-    const colors = ["#3b82f6", "#8b5cf6", "#6366f1", "#4f46e5"];
-    for (let i = 0; i < 8; i++) {
+    const colors = ["#3b82f6", "#8b5cf6", "#6366f1", "#4f46e5", "#c084fc"];
+    for (let i = 0; i < 15; i++) { // Increased count from 8 to 15
         data.push({
             position: [
                 (Math.random() - 0.5) * 15,
@@ -66,9 +64,10 @@ function Scene() {
 
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} intensity={1} color="#8b5cf6" />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#3b82f6" />
+      <ambientLight intensity={0.7} />
+      <pointLight position={[10, 10, 10]} intensity={1.5} color="#8b5cf6" />
+      <pointLight position={[-10, -10, -10]} intensity={0.8} color="#3b82f6" />
+      <spotLight position={[0, 10, 0]} intensity={1} color="#ffffff" />
       {plates.map((plate, i) => (
         <GlassPlate key={i} {...plate} />
       ))}
@@ -78,15 +77,23 @@ function Scene() {
 
 export default function GlassFlow() {
   return (
-    <div className="absolute inset-0 z-0 opacity-40" style={{ pointerEvents: "none" }}>
-      <Canvas
-        camera={{ position: [0, 0, 8], fov: 50 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance", stencil: false }}
-        dpr={[1, 1.2]}
-      >
-        <Scene />
-      </Canvas>
+    <div className="absolute inset-0 z-0 opacity-80" style={{ pointerEvents: "none" }}>
+      <InViewCanvas>
+        <Canvas
+          camera={{ position: [0, 0, 8], fov: 50 }}
+          style={{ background: "transparent" }}
+          gl={{ 
+            alpha: true, 
+            antialias: false, 
+            powerPreference: "high-performance", 
+            stencil: false,
+            depth: false
+          }}
+          dpr={[1, 1.5]}
+        >
+          <Scene />
+        </Canvas>
+      </InViewCanvas>
     </div>
   );
 }

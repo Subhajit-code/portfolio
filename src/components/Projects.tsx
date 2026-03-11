@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DynamicNeuralNetwork } from "./three";
 
 // Project Data with Media & Layout Configuration
@@ -113,6 +113,18 @@ export default function Projects() {
     const selectedProject = projects.find((p) => p.id === selectedId);
     const visibleProjects = projects.slice(0, visibleCount);
     const hasMore = visibleCount < projects.length;
+
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        if (selectedId) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedId]);
 
     return (
         <section className={`relative bg-[#0a0a0a] min-h-screen py-32 px-4 md:px-12 overflow-hidden ${selectedId ? 'z-[999]' : 'z-20'}`} id="projects">
@@ -246,12 +258,13 @@ export default function Projects() {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 onClick={() => setSelectedId(null)}
-                                className="fixed inset-0 bg-black/70 backdrop-blur-xl z-[100]"
+                                className="fixed inset-0 bg-black/70 backdrop-blur-md z-[100]"
                             />
                             <div className="fixed inset-0 flex items-center justify-center z-[110] pointer-events-auto p-4 md:p-8">
                                 <motion.div
                                     layoutId={selectedId}
-                                    className="bg-[#0f0f0f] w-full max-w-5xl max-h-[85vh] md:max-h-[90vh] overflow-y-auto rounded-[2rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] relative scrollbar-hide flex flex-col md:flex-row"
+                                    data-lenis-prevent
+                                    className="bg-[#0f0f0f] w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[2rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] relative flex flex-col md:flex-row"
                                 >
                                     <button
                                         onClick={() => setSelectedId(null)}

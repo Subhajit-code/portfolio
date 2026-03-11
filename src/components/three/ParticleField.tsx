@@ -90,20 +90,30 @@ function SecondaryStars() {
   );
 }
 
+import { InViewCanvas } from "./InViewCanvas";
+
 export default function ParticleField() {
   return (
     <div
       className="absolute inset-0 z-0"
       style={{ pointerEvents: "none" }}
     >
-      <Canvas
-        camera={{ position: [0, 0, 1], fov: 75 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance", stencil: false }}
-        dpr={[1, 1.2]}
-      >
-        <StarField />
-      </Canvas>
+      <InViewCanvas>
+        <Canvas
+          camera={{ position: [0, 0, 1], fov: 75 }}
+          style={{ background: "transparent" }}
+          gl={{ 
+            alpha: true, 
+            antialias: false, 
+            powerPreference: "high-performance", 
+            stencil: false,
+            depth: false
+          }}
+          dpr={[1, 1.5]}
+        >
+          <StarField />
+        </Canvas>
+      </InViewCanvas>
     </div>
   );
 }

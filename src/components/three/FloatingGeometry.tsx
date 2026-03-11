@@ -147,17 +147,27 @@ function Scene() {
   );
 }
 
+import { InViewCanvas } from "./InViewCanvas";
+
 export default function FloatingGeometry() {
   return (
     <div className="w-full h-full min-h-[400px]" style={{ pointerEvents: "auto" }}>
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 50 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true }}
-        dpr={[1, 2]}
-      >
-        <Scene />
-      </Canvas>
+      <InViewCanvas>
+        <Canvas
+          camera={{ position: [0, 0, 5], fov: 50 }}
+          style={{ background: "transparent" }}
+          gl={{ 
+            alpha: true, 
+            antialias: false,
+            powerPreference: "high-performance",
+            stencil: false,
+            depth: false
+          }}
+          dpr={[1, 1.5]}
+        >
+          <Scene />
+        </Canvas>
+      </InViewCanvas>
     </div>
   );
 }

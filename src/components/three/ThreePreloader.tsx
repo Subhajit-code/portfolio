@@ -1,26 +1,21 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Preload } from "@react-three/drei";
-import { useState } from "react";
+import { useEffect } from "react";
 
-function WarmUp({ onDone }: { onDone: () => void }) {
-  useFrame(() => {
-    onDone();
-  });
-  return <Preload all />;
-}
+// Proactively fetch heavy Three.js chunks to warm up the cache
+const preloadThreeComponents = () => {
+    // We don't need to do anything with the results, just triggering the fetch
+    import("./ParticleField");
+    import("./WaveGrid");
+    import("./ParticleRing");
+};
 
 export default function ThreePreloader() {
-  const [active, setActive] = useState(true);
+  useEffect(() => {
+    // Delay slightly to prioritize the main Hero image and above-the-fold content
+    const timer = setTimeout(preloadThreeComponents, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
-  if (!active) return null;
-
-  return (
-    <div style={{ position: "absolute", width: 1, height: 1, opacity: 0.01, pointerEvents: "none" }}>
-      <Canvas gl={{ powerPreference: "high-performance", antialias: false }}>
-        <WarmUp onDone={() => setActive(false)} />
-      </Canvas>
-    </div>
-  );
+  return null; // No UI needed for this optimization
 }

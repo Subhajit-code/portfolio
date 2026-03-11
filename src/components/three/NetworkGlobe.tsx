@@ -225,19 +225,29 @@ function OrbitDots() {
   );
 }
 
+import { InViewCanvas } from "./InViewCanvas";
+
 export default function NetworkGlobe() {
   return (
     <div className="absolute inset-0 z-0 opacity-80" style={{ pointerEvents: "none" }}>
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 50 }}
-        style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance", stencil: false }}
-        dpr={[1, 1.2]}
-      >
-        <Globe />
-        <ConnectionPoints />
-        <OrbitDots />
-      </Canvas>
+      <InViewCanvas>
+        <Canvas
+          camera={{ position: [0, 0, 6], fov: 50 }}
+          style={{ background: "transparent" }}
+          gl={{ 
+            alpha: true, 
+            antialias: false, 
+            powerPreference: "high-performance", 
+            stencil: false,
+            depth: false
+          }}
+          dpr={[1, 1.5]}
+        >
+          <Globe />
+          <ConnectionPoints />
+          <OrbitDots />
+        </Canvas>
+      </InViewCanvas>
     </div>
   );
 }
