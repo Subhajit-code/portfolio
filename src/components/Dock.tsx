@@ -94,10 +94,10 @@ function DockIcon({
   });
 
   const widthSync = useTransform(distance, [-200, 0, 200], [44, 100, 44]);
-  const width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
+  const width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12, restDelta: 0.1 });
 
   const ySync = useTransform(distance, [-200, 0, 200], [0, -25, 0]);
-  const y = useSpring(ySync, { mass: 0.1, stiffness: 150, damping: 12 });
+  const y = useSpring(ySync, { mass: 0.1, stiffness: 150, damping: 12, restDelta: 0.1 });
 
   const iconWidth = isMobile ? 40 : width;
   const iconY = isMobile ? 0 : y;

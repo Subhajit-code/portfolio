@@ -241,7 +241,7 @@ export default function NetworkGlobe() {
             stencil: false,
             depth: false
           }}
-          dpr={[1, 1.5]}
+          dpr={1}
         >
           <Globe />
           <ConnectionPoints />

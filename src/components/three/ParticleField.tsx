@@ -25,7 +25,7 @@ function StarField() {
   const mouseRef = useRef({ x: 0, y: 0 });
   const { viewport } = useThree();
 
-  const positions = useMemo(() => generateSpherePoints(5000, 1.5), []);
+  const positions = useMemo(() => generateSpherePoints(2500, 1.5), []);
 
   // Smooth mouse tracking
   const handlePointerMove = useCallback((e: THREE.Event & { clientX: number; clientY: number }) => {
@@ -67,7 +67,7 @@ function StarField() {
 
 function SecondaryStars() {
   const pointsRef = useRef<THREE.Points>(null);
-  const positions = useMemo(() => generateSpherePoints(3000, 2.0), []);
+  const positions = useMemo(() => generateSpherePoints(1500, 2.0), []);
 
   useFrame((state, delta) => {
     if (!pointsRef.current) return;
@@ -109,7 +109,7 @@ export default function ParticleField() {
             stencil: false,
             depth: false
           }}
-          dpr={[1, 1.5]}
+          dpr={[1, 1.2]}
         >
           <StarField />
         </Canvas>

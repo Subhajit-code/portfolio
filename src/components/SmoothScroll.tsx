@@ -16,15 +16,17 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       lerp: 0.1, // Linear interpolation factor for smoother state changes
     });
 
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
       lenis.destroy();
+      cancelAnimationFrame(rafId);
     };
   }, []);
 

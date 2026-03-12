@@ -13,7 +13,7 @@ export function InViewCanvas({ children }: { children: React.ReactNode }) {
       },
       { 
         threshold: 0,
-        rootMargin: "400px 0px" // Start loading 400px before it enters the screen
+        rootMargin: "200px 0px" // Start loading 200px before it enters the screen
       }
     );
 

@@ -119,10 +119,23 @@ function MinimalCursor({ isVisible }: { isVisible: boolean }) {
 export default function CustomCursor() {
   const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    document.body.classList.add("hide-cursor");
+    
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        document.body.classList.remove("hide-cursor");
+      } else {
+        document.body.classList.add("hide-cursor");
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
     
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
@@ -132,12 +145,13 @@ export default function CustomCursor() {
     
     return () => {
       document.body.classList.remove("hide-cursor");
+      window.removeEventListener("resize", checkMobile);
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted || isMobile) return null;
 
   return (
     <div
@@ -152,11 +166,11 @@ export default function CustomCursor() {
         style={{ pointerEvents: "none" }}
         gl={{ 
           alpha: true, 
-          antialias: true,
+          antialias: false,
           powerPreference: "high-performance",
           depth: false
         }}
-        dpr={[1, 2]}
+        dpr={1}
       >
         <MinimalCursor isVisible={isVisible} />
       </Canvas>

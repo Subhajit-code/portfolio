@@ -117,7 +117,7 @@ export default function AuroraWaves() {
             stencil: false,
             depth: false
           }}
-          dpr={[1, 1.5]}
+          dpr={1}
         >
           {/* Multiple aurora ribbons at different heights/speeds */}
           <AuroraRibbon yOffset={1.5} color="#8b5cf6" speed={0.6} amplitude={0.4} />

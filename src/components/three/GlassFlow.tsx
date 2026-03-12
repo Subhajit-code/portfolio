@@ -39,7 +39,7 @@ function Scene() {
   const plates = useMemo(() => {
     const data = [];
     const colors = ["#3b82f6", "#8b5cf6", "#6366f1", "#4f46e5", "#c084fc"];
-    for (let i = 0; i < 15; i++) { // Increased count from 8 to 15
+    for (let i = 0; i < 10; i++) { // Reduced from 15 for performance
         data.push({
             position: [
                 (Math.random() - 0.5) * 15,
@@ -89,7 +89,7 @@ export default function GlassFlow() {
             stencil: false,
             depth: false
           }}
-          dpr={[1, 1.5]}
+          dpr={1}
         >
           <Scene />
         </Canvas>

@@ -148,7 +148,7 @@ export default function NeuralNetwork() {
             powerPreference: "high-performance", 
             stencil: false 
           }}
-          dpr={[1, 1.5]}
+          dpr={1}
         >
           <DataStream offset={0} color="#8b5cf6" radius={2} speed={0.1} />
           <DataStream offset={Math.PI / 2} color="#3b82f6" radius={2.5} speed={-0.08} />

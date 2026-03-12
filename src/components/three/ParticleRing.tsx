@@ -9,7 +9,7 @@ function GlowingRing() {
   const innerRingRef = useRef<THREE.Points>(null);
 
   const { positions, sizes } = useMemo(() => {
-    const count = 4000;
+    const count = 1500;
     const pos = new Float32Array(count * 3);
     const sz = new Float32Array(count);
 
@@ -31,7 +31,7 @@ function GlowingRing() {
   }, []);
 
   const innerPositions = useMemo(() => {
-    const count = 2500;
+    const count = 800;
     const pos = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
@@ -124,7 +124,7 @@ function AmbientDust() {
   const dustRef = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
-    const count = 2000;
+    const count = 500;
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 8;
@@ -176,7 +176,7 @@ export default function ParticleRing() {
             stencil: false,
             depth: false
           }}
-          dpr={[1, 1.5]}
+          dpr={[1, 1.2]}
         >
           <GlowingRing />
           <AmbientDust />
