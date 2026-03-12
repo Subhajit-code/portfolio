@@ -9,7 +9,7 @@ function GlowingRing() {
   const innerRingRef = useRef<THREE.Points>(null);
 
   const { positions, sizes } = useMemo(() => {
-    const count = 2000;
+    const count = 4000;
     const pos = new Float32Array(count * 3);
     const sz = new Float32Array(count);
 
@@ -31,7 +31,7 @@ function GlowingRing() {
   }, []);
 
   const innerPositions = useMemo(() => {
-    const count = 1200;
+    const count = 2500;
     const pos = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
@@ -71,9 +71,9 @@ function GlowingRing() {
         </bufferGeometry>
         <pointsMaterial
           color="#8b5cf6"
-          size={0.02}
+          size={0.025}
           transparent
-          opacity={0.9}
+          opacity={1.0}
           sizeAttenuation
           blending={THREE.AdditiveBlending}
           depthWrite={false}
@@ -90,9 +90,9 @@ function GlowingRing() {
         </bufferGeometry>
         <pointsMaterial
           color="#3b82f6"
-          size={0.015}
+          size={0.02}
           transparent
-          opacity={0.7}
+          opacity={0.9}
           sizeAttenuation
           blending={THREE.AdditiveBlending}
           depthWrite={false}
@@ -124,7 +124,7 @@ function AmbientDust() {
   const dustRef = useRef<THREE.Points>(null);
 
   const positions = useMemo(() => {
-    const count = 500;
+    const count = 2000;
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 8;
@@ -148,10 +148,10 @@ function AmbientDust() {
         />
       </bufferGeometry>
       <pointsMaterial
-        color="#6366f1"
-        size={0.008}
+        color="#a855f7"
+        size={0.012}
         transparent
-        opacity={0.4}
+        opacity={0.6}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
         depthWrite={false}

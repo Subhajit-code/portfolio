@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import ThreePreloader from "@/components/three/ThreePreloader";
+import { CustomCursor } from "@/components/three";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <SmoothScroll>
           <ThreePreloader />
+          <CustomCursor />
           {children}
         </SmoothScroll>
       </body>

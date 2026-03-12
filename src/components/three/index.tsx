@@ -18,3 +18,4 @@ export const DynamicWaveGrid = dynamic(() => import("./WaveGrid"), { ssr: false 
 export const DynamicNetworkGlobe = dynamic(() => import("./NetworkGlobe"), { ssr: false });
 export const DynamicNeuralNetwork = dynamic(() => import("./NeuralNetwork"), { ssr: false });
 export const DynamicGlassFlow = dynamic(() => import("./GlassFlow"), { ssr: false });
+export const CustomCursor = dynamic(() => import("./CustomCursor"), { ssr: false });

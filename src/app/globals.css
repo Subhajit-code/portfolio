@@ -30,4 +30,7 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  .hide-cursor, .hide-cursor * {
+    cursor: none !important;
+  }
 }

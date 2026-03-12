@@ -59,7 +59,7 @@ export default function Dock() {
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
-      className="fixed bottom-6 md:top-8 md:bottom-auto left-1/2 -translate-x-1/2 z-50 flex h-14 md:h-16 items-center gap-2 md:gap-4 rounded-2xl border border-white/10 bg-black/50 md:bg-white/5 px-2 md:px-4 backdrop-blur-md max-w-[95vw] overflow-x-auto no-scrollbar"
+      className="fixed bottom-6 md:top-8 md:bottom-auto left-1/2 -translate-x-1/2 z-50 flex h-16 md:h-20 items-center gap-3 md:gap-5 rounded-3xl border border-white/20 bg-black/40 md:bg-white/5 px-4 md:px-6 backdrop-blur-xl max-w-[95vw] overflow-visible no-scrollbar shadow-2xl"
     >
       {DOCK_ITEMS.map((item) => (
         <DockIcon key={item.id} mouseX={mouseX} item={item} />
@@ -93,17 +93,21 @@ function DockIcon({
     return val - bounds.x - bounds.width / 2;
   });
 
-  const widthSync = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
+  const widthSync = useTransform(distance, [-200, 0, 200], [44, 100, 44]);
   const width = useSpring(widthSync, { mass: 0.1, stiffness: 150, damping: 12 });
 
+  const ySync = useTransform(distance, [-200, 0, 200], [0, -25, 0]);
+  const y = useSpring(ySync, { mass: 0.1, stiffness: 150, damping: 12 });
+
   const iconWidth = isMobile ? 40 : width;
+  const iconY = isMobile ? 0 : y;
 
   return (
     <Link href={item.href} target={item.external ? "_blank" : undefined}>
       <motion.div
         ref={ref}
-        style={{ width: iconWidth }}
-        className="aspect-square w-10 md:w-12 rounded-full bg-gray-700/50 border border-white/10 flex items-center justify-center hover:bg-gray-600/80 transition-colors group relative shrink-0"
+        style={{ width: iconWidth, y: iconY }}
+        className="aspect-square rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors group relative shrink-0 shadow-xl"
       >
         <item.icon className="w-1/2 h-1/2 text-gray-200 group-hover:text-white" />
 
