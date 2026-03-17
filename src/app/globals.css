@@ -33,4 +33,8 @@ body {
   .hide-cursor, .hide-cursor * {
     cursor: none !important;
   }
+  /* Mobile dock scrollbar hide */
+  .mobile-dock-scroll::-webkit-scrollbar {
+    display: none;
+  }
 }
